@@ -37,4 +37,4 @@ const PaymentSchema = new mongoose.Schema({
    },
 });
 
-mofule.exports = mongoose.model('payment',PaymentSchema)
+module.exports = mongoose.model('payment',PaymentSchema)
