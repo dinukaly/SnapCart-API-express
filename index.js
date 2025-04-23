@@ -29,7 +29,7 @@ const VoucherRoute = require('./routes/VoucherRoute');
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb:127.0.0.1:27017/quick_cart_db').then(() => {
+mongoose.connect('mongodb://127.0.0.1:27017/quick_cart_db').then(() => {
     console.log('Connected to the database');
 }).catch((error) => {
     console.log(error);
