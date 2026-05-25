@@ -12,14 +12,10 @@ const categoryRoutes = require('./modules/categories/category.routes');
 const cartRoutes = require('./modules/cart/cart.routes');
 const wishlistRoutes = require('./modules/wishlist/wishlist.routes');
 const orderRoutes = require('./modules/orders/order.routes');
-const returnRoutes = require('./modules/orders/return.routes');
+const checkoutRoutes = require('./modules/orders/checkout.routes');
 const paymentRoutes = require('./modules/payments/payment.routes');
-const paymentMethodRoutes = require('./modules/payments/payment-method.routes');
-const refundRoutes = require('./modules/payments/refund.routes');
 const reviewRoutes = require('./modules/reviews/review.routes');
-const dealRoutes = require('./modules/promotions/deal.routes');
-const voucherRoutes = require('./modules/promotions/voucher.routes');
-const voucherDetailRoutes = require('./modules/promotions/voucher-detail.routes');
+const promotionRoutes = require('./modules/promotions/promotion.routes');
 
 const app = express();
 
@@ -33,24 +29,19 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Legacy route adapters keep mobile-facing URLs stable while each module is refactored.
 app.use(`${API_PREFIX}/auth`, authRoutes);
 app.use(`${API_PREFIX}/users`, userRoutes);
 app.use(`${API_PREFIX}/products`, productRoutes);
 app.use(`${API_PREFIX}/categories`, categoryRoutes);
-app.use(`${API_PREFIX}/carts`, cartRoutes);
-app.use(`${API_PREFIX}/bookmarks`, wishlistRoutes);
+app.use(`${API_PREFIX}/cart`, cartRoutes);
+app.use(`${API_PREFIX}/wishlist`, wishlistRoutes);
 app.use(`${API_PREFIX}/orders`, orderRoutes);
-app.use(`${API_PREFIX}/returns`, returnRoutes);
+app.use(`${API_PREFIX}/checkout`, checkoutRoutes);
 app.use(`${API_PREFIX}/payments`, paymentRoutes);
-app.use(`${API_PREFIX}/paymentmethods`, paymentMethodRoutes);
-app.use(`${API_PREFIX}/refunds`, refundRoutes);
 app.use(`${API_PREFIX}/reviews`, reviewRoutes);
-app.use(`${API_PREFIX}/deals`, dealRoutes);
-app.use(`${API_PREFIX}/vouchers`, voucherRoutes);
-app.use(`${API_PREFIX}/voucherdetails`, voucherDetailRoutes);
+app.use(`${API_PREFIX}/promotions`, promotionRoutes);
 
-// Role CRUD is intentionally not mounted here; Phase 2 will replace it with RBAC.
+// Role CRUD is intentionally absent; Phase 2 will manage authorization internally.
 app.use(notFoundHandler);
 app.use(errorHandler);
 
