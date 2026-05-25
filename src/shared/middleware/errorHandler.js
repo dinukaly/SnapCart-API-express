@@ -49,7 +49,9 @@ const errorHandler = (error, req, res, next) => {
       : 'Internal server error');
   const errors = normalized?.errors || error.errors || [];
 
-  logger.error('Request failed', {
+  const log = statusCode >= HTTP_STATUS.INTERNAL_SERVER_ERROR ? logger.error : logger.warn;
+
+  log('Request failed', {
     error,
     method: req.method,
     path: req.originalUrl,
