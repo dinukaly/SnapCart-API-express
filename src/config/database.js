@@ -1,0 +1,13 @@
+const mongoose = require('mongoose');
+
+const { env } = require('./env');
+const { logger } = require('./logger');
+
+const connectDatabase = async () => {
+  mongoose.set('strictQuery', true);
+
+  await mongoose.connect(env.mongoUri);
+  logger.info('Database connected');
+};
+
+module.exports = { connectDatabase };
